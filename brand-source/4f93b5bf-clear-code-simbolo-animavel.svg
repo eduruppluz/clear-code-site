@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 330" role="img" aria-labelledby="title desc">
+<title id="title">Símbolo Clear Code ERL</title>
+<desc id="desc">Lâmpada com símbolo de código, em gradiente violeta, azul e ciano.</desc>
+
+<defs>
+  <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#4B2CFF"/>
+    <stop offset="52%" stop-color="#176BFF"/>
+    <stop offset="100%" stop-color="#08BFE8"/>
+  </linearGradient>
+  <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="4" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+</defs>
+
+<g id="clear-code-symbol" fill="none" stroke="url(#logo-gradient)" stroke-linecap="round" stroke-linejoin="round">
+  <!-- rays -->
+  <g id="bulb-rays" stroke-width="8">
+    <path d="M150 18V48"/>
+    <path d="M62 54L84 76"/>
+    <path d="M238 54L216 76"/>
+    <path d="M28 142H62"/>
+    <path d="M272 142H238"/>
+  </g>
+
+  <!-- bulb -->
+  <path id="bulb-outline" stroke-width="9"
+        d="M150 60
+           C95 60 62 96 62 144
+           C62 176 79 196 103 216
+           C113 224 118 236 118 249
+           V264
+           H182
+           V249
+           C182 236 187 224 197 216
+           C221 196 238 176 238 144
+           C238 96 205 60 150 60Z"/>
+
+  <!-- base -->
+  <g id="bulb-base" stroke-width="8">
+    <path d="M120 282H180"/>
+    <path d="M131 298H169"/>
+    <path d="M141 313H159"/>
+  </g>
+
+  <!-- code -->
+  <g id="code-symbol" stroke-width="10">
+    <path d="M127 126L105 146L127 166"/>
+    <path d="M173 126L195 146L173 166"/>
+    <path d="M158 112L142 180"/>
+  </g>
+</g>
+
+</svg>

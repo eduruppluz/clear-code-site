@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 360" role="img" aria-labelledby="title desc">
+<title id="title">Clear Code ERL</title>
+<desc id="desc">Logo vetorial da Clear Code ERL com símbolo de lâmpada e código.</desc>
+
+<defs>
+  <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#4B2CFF"/>
+    <stop offset="52%" stop-color="#176BFF"/>
+    <stop offset="100%" stop-color="#08BFE8"/>
+  </linearGradient>
+  <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="4" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+</defs>
+
+<g id="clear-code-symbol" transform="translate(45 15) scale(0.96)" fill="none" stroke="url(#logo-gradient)" stroke-linecap="round" stroke-linejoin="round">
+  <!-- rays -->
+  <g id="bulb-rays" stroke-width="8">
+    <path d="M150 18V48"/>
+    <path d="M62 54L84 76"/>
+    <path d="M238 54L216 76"/>
+    <path d="M28 142H62"/>
+    <path d="M272 142H238"/>
+  </g>
+
+  <!-- bulb -->
+  <path id="bulb-outline" stroke-width="9"
+        d="M150 60
+           C95 60 62 96 62 144
+           C62 176 79 196 103 216
+           C113 224 118 236 118 249
+           V264
+           H182
+           V249
+           C182 236 187 224 197 216
+           C221 196 238 176 238 144
+           C238 96 205 60 150 60Z"/>
+
+  <!-- base -->
+  <g id="bulb-base" stroke-width="8">
+    <path d="M120 282H180"/>
+    <path d="M131 298H169"/>
+    <path d="M141 313H159"/>
+  </g>
+
+  <!-- code -->
+  <g id="code-symbol" stroke-width="10">
+    <path d="M127 126L105 146L127 166"/>
+    <path d="M173 126L195 146L173 166"/>
+    <path d="M158 112L142 180"/>
+  </g>
+</g>
+
+
+<g id="wordmark" font-family="Inter, Arial, sans-serif">
+  <text id="clear-text" x="365" y="155" font-size="84" font-weight="300" fill="#111827" letter-spacing="4">CLEAR</text>
+  <text id="code-text"  x="680" y="155" font-size="84" font-weight="800" fill="#111827" letter-spacing="2">CODE</text>
+
+  <g id="erl-group">
+    <path id="erl-line-left"  d="M370 210H515" stroke="url(#logo-gradient)" stroke-width="4" stroke-linecap="round"/>
+    <text id="erl-text" x="548" y="230" font-size="58" font-weight="700" fill="#176BFF" letter-spacing="28">ERL</text>
+    <path id="erl-line-right" d="M780 210H925" stroke="url(#logo-gradient)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <text id="tagline" x="510" y="292" font-size="28" font-weight="300" fill="#5E6673" letter-spacing="2">Da ideia ao código.</text>
+</g>
+</svg>

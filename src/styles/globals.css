@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* Tokens expostos ao Tailwind (bg-ink, text-muted, font-display…) */
+@theme {
+  --color-ink: #020b16;
+  --color-graphite: #111827;
+  --color-brand-blue: #176bff;
+  --color-brand-cyan: #08bfe8;
+  --color-brand-violet: #4b2cff;
+  --color-muted: #a7b3c4;
+  --color-dim: #6b7a8f;
+  --font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    background: var(--cc-ink);
+    color: var(--text);
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background: var(--cc-ink);
+    min-height: 100dvh;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: color-mix(in oklab, var(--accent-a) 40%, transparent); color: #fff; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-a);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  /* Palavra destacada: segue a cor da seção/página; .is-sweeping passa um feixe de luz */
+  .text-gradient {
+    background-image:
+      linear-gradient(105deg, transparent 42%, rgb(255 255 255 / 0.9) 50%, transparent 58%),
+      linear-gradient(100deg, color-mix(in oklab, var(--accent-b) 78%, white) 0%, color-mix(in oklab, var(--accent-a) 88%, white) 100%);
+    background-size: 260% 100%, 100% 100%;
+    background-position: 130% 0, 0 0;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient.is-sweeping { animation: shine 1.3s var(--ease-out) forwards, shine-loop 8s 2s var(--ease-in-out) infinite; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--accent-a) 75%, white);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 1.75rem;
+    height: 1px;
+    background: var(--grad-accent);
+  }
+
+  /* Card com borda que acende na cor --c (padrão: acento da seção) */
+  .glow-card {
+    --c: var(--accent-a);
+    position: relative;
+    isolation: isolate;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    background:
+      radial-gradient(120% 80% at 0% 0%, color-mix(in oklab, var(--c) 9%, transparent), transparent 60%),
+      linear-gradient(180deg, rgb(10 24 40 / 0.85), rgb(4 12 22 / 0.9));
+    transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+  }
+  .glow-card[data-on='true'],
+  .glow-card.is-interactive:hover {
+    border-color: color-mix(in oklab, var(--c) 65%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--c) 18%, transparent) inset, 0 24px 70px -30px var(--c);
+  }
+  .glow-card.is-interactive:hover { transform: translateY(-4px); }
+  @media (hover: none) {
+    .glow-card.is-interactive[data-on='true'] { transform: translateY(-2px); }
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--cc-ink);
+    font-weight: 600;
+  }
+  .skip-link:focus { top: 1rem; }
+}
+
+@keyframes shine {
+  from { background-position: 130% 0, 0 0; }
+  to   { background-position: -30% 0, 0 0; }
+}
+/* feixe passa de novo a cada 8s (movimento em 20% do ciclo, o resto em repouso) */
+@keyframes shine-loop {
+  0%   { background-position: 130% 0, 0 0; }
+  20%, 100% { background-position: -30% 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
