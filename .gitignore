@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-preview
+site-estatico
+.env
+.env.*
+.vscode
+.DS_Store
+Thumbs.db
+*.log
