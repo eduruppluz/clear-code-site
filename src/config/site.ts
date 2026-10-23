@@ -16,8 +16,8 @@ export const site = {
   contact: {
     whatsappDisplay: '(41) 98473-1156',
     whatsappUrl: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
-    instagramHandle: '@edu.rupp',
-    instagramUrl: 'https://www.instagram.com/edu.rupp/',
-    email: 'edurupp.luz@gmail.com',
+    instagramHandle: '@clearcode.erl',
+    instagramUrl: 'https://www.instagram.com/clearcode.erl/',
+    email: 'edurupp.dev@gmail.com',
   },
 } as const
