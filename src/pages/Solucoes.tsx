@@ -13,8 +13,8 @@ export default function Solucoes() {
       <PageHero
         theme={themes.solucoes}
         eyebrow="Soluções"
-        title={<>Do primeiro clique <span className="text-gradient">até a venda</span>.</>}
-        lead="Sites, landing pages e Meta Ads para atrair. Formulários e WhatsApp para captar. CRM e automações para organizar. Você escolhe por onde começar."
+        title={<>Seu cliente chega. Sua empresa está <span className="text-gradient">pronta para atender</span>.</>}
+        lead="A Clear Code cuida do caminho completo do potencial cliente: atrair, captar e organizar. Você escolhe por onde começar."
       >
         <div className="mt-14"><StageStrip /></div>
       </PageHero>

@@ -44,8 +44,8 @@ export default function Home() {
           <SectionHeading
             id="solucoes-title"
             eyebrow="Soluções"
-            title={<>Do primeiro clique <span className="text-gradient">até a venda</span>.</>}
-            lead="Cuidamos do caminho completo do seu cliente: ele te encontra, entra em contato e é acompanhado até fechar negócio."
+            title={<>Seu cliente chega. Sua empresa está <span className="text-gradient">pronta para atender</span>.</>}
+            lead="A Clear Code cuida do caminho completo do potencial cliente: ele encontra o seu negócio, entra em contato e é bem acompanhado."
           />
           <div className="mt-14">
             <StageStrip />

@@ -14,7 +14,7 @@ export const pageMeta: Record<string, { title: string; description: string }> = 
   '/': {
     title: 'Clear Code ERL — Tecnologia para transformar o seu negócio',
     description:
-      'Sites, landing pages, Meta Ads, CRM e automações. A Clear Code ERL cuida do caminho do seu cliente, do primeiro clique até a venda.',
+      'Sites, anúncios e automações para atrair clientes, captar contatos e organizar oportunidades comerciais. Do primeiro clique ao contato bem acompanhado.',
   },
   '/solucoes': {
     title: 'Soluções — Clear Code ERL',

@@ -11,11 +11,11 @@ export const pillars = [
 export type ServiceId = 'sites' | 'landing' | 'trafego' | 'leads' | 'crm' | 'automacoes'
 export type Stage = 'Atrair' | 'Captar' | 'Organizar'
 
-/** As 3 etapas do caminho do cliente — "do primeiro clique até a venda" */
+/** As 3 etapas do caminho do cliente — "do primeiro clique ao contato bem acompanhado" */
 export const stages: { name: Stage; text: string; color: string }[] = [
-  { name: 'Atrair', text: 'Sites, landing pages e Meta Ads para o seu cliente te encontrar.', color: palette.aqua },
-  { name: 'Captar', text: 'Formulários, WhatsApp e páginas de conversão para ele entrar em contato.', color: palette.azul },
-  { name: 'Organizar', text: 'CRM e automações para nenhum contato se perder até virar venda.', color: palette.lilas },
+  { name: 'Atrair', text: 'Sites, landing pages e Meta Ads para que potenciais clientes encontrem o negócio.', color: palette.aqua },
+  { name: 'Captar', text: 'Formulários, WhatsApp e páginas de conversão para transformar o interesse em contatos.', color: palette.azul },
+  { name: 'Organizar', text: 'CRM e automações para registrar, organizar e acompanhar os contatos até a oportunidade de venda.', color: palette.lilas },
 ]
 
 export const services: { id: ServiceId; stage: Stage; title: string; short: string; text: string; color: string }[] = [
@@ -56,7 +56,7 @@ export const services: { id: ServiceId; stage: Stage; title: string; short: stri
     stage: 'Organizar',
     title: 'CRM',
     short: 'Seus contatos em um só lugar',
-    text: 'Implantação e configuração de CRM para acompanhar cada contato, da primeira mensagem até a venda, sem planilha perdida.',
+    text: 'Implantação e configuração de CRM para acompanhar cada contato desde a primeira mensagem, sem planilha perdida.',
     color: palette.violeta,
   },
   {

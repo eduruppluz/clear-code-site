@@ -89,7 +89,12 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.85, ease }}
           >
-            Do primeiro clique até a venda: sites, landing pages e Meta Ads para atrair clientes, e CRM e automações para nenhum contato se perder.
+            <span className="block font-display text-[clamp(1.15rem,2vw,1.45rem)] font-bold leading-snug text-white">
+              Do primeiro clique ao contato bem acompanhado.
+            </span>
+            <span className="mt-2 block">
+              Sites, anúncios e automações para atrair clientes, captar contatos e organizar oportunidades comerciais.
+            </span>
           </motion.p>
 
           <motion.div
@@ -105,6 +110,16 @@ export function Hero() {
               Ver projetos
             </Button>
           </motion.div>
+
+          <motion.p
+            className="mt-8 flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-dim"
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+          >
+            <span className="h-px w-8" style={{ background: 'var(--grad-accent)' }} />
+            Da ideia ao código.
+          </motion.p>
         </motion.div>
 
         <motion.div style={desktop ? { y: visualY, opacity: fade } : undefined} className="relative -mx-4 sm:mx-0">
