@@ -14,11 +14,11 @@ export const pageMeta: Record<string, { title: string; description: string }> = 
   '/': {
     title: 'Clear Code ERL — Tecnologia para transformar o seu negócio',
     description:
-      'Sites, landing pages, geração de leads, tráfego pago e criativos. Soluções digitais pensadas para fortalecer sua presença, gerar oportunidades e ajudar sua empresa a crescer.',
+      'Sites, landing pages, Meta Ads, CRM e automações. A Clear Code ERL cuida do caminho do seu cliente, do primeiro clique até a venda.',
   },
   '/solucoes': {
     title: 'Soluções — Clear Code ERL',
-    description: 'Sites, landing pages, geração de leads, tráfego pago e criativos: soluções digitais para diferentes momentos do seu negócio.',
+    description: 'Atrair, captar e organizar: sites, landing pages, Meta Ads, formulários, WhatsApp, CRM e automações para o seu negócio.',
   },
   '/projetos': {
     title: 'Projetos — Clear Code ERL',

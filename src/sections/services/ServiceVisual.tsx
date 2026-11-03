@@ -76,8 +76,8 @@ function Leads() {
         </div>
       </Frame>
       {/* novo lead entrando */}
-      <div className="absolute right-[4%] top-[14%] flex items-center gap-1.5 rounded-full border border-white/10 bg-[#06121f] px-2.5 py-1 text-[0.6rem] text-white/80 transition-[transform,opacity] duration-700 ease-[var(--ease-out)] [opacity:calc(0.35+var(--k,0)*0.65)] [transform:translate(calc((1-var(--k,0))*14px),calc((1-var(--k,0))*-6px))]">
-        <span className="grid size-3.5 place-items-center rounded-full text-[0.5rem] text-[#020B16]" style={{ background: 'var(--c)' }}>✓</span>
+      <div className="absolute right-[4%] top-[14%] flex items-center gap-1.5 rounded-full border border-white/10 bg-[#0b1b2a] px-2.5 py-1 text-[0.6rem] text-white/80 transition-[transform,opacity] duration-700 ease-[var(--ease-out)] [opacity:calc(0.35+var(--k,0)*0.65)] [transform:translate(calc((1-var(--k,0))*14px),calc((1-var(--k,0))*-6px))]">
+        <span className="grid size-3.5 place-items-center rounded-full text-[0.5rem] text-[#021024]" style={{ background: 'var(--c)' }}>✓</span>
         Novo contato
       </div>
     </div>
@@ -109,28 +109,72 @@ function Trafego() {
   )
 }
 
-function Criativos() {
+function Crm() {
+  const cols = [
+    { t: 'Novo', n: 3 },
+    { t: 'Em conversa', n: 2 },
+    { t: 'Fechado', n: 1 },
+  ]
   return (
-    <div className="relative flex h-full w-full items-center justify-center [perspective:600px]">
-      <div className="absolute h-[82%] w-[42%] -translate-x-[38%] rotate-[-8deg] rounded-xl border border-white/[0.06] bg-white/[0.02]" />
-      <Frame className="relative h-full w-[46%] rounded-[1.1rem] p-2 transition-transform duration-700 ease-[var(--ease-out)] [transform:rotateY(calc(var(--k,0)*-10deg))_rotateZ(calc(var(--k,0)*2deg))]">
-        <div className="flex items-center gap-1.5">
-          <span className="size-3.5 rounded-full" style={{ background: 'var(--c)' }} />
-          <span className="h-1.5 w-10 rounded-full bg-white/25" />
-        </div>
-        <div className="relative mt-2 h-[52%] overflow-hidden rounded-lg" style={{ background: `linear-gradient(150deg, ${tone(70)}, #0a1a33)` }}>
-          <div className="absolute -bottom-4 left-1/2 size-16 -translate-x-1/2 rounded-full border border-white/25 transition-transform duration-700 [transform:translateX(-50%)_scale(calc(1+var(--k,0)*0.25))]" />
-          <div className="absolute right-2 top-2 rounded-full bg-white/90 px-1.5 text-[0.45rem] font-bold text-[#020B16]">NOVO</div>
-        </div>
-        <div className="mt-2 h-1.5 w-4/5 rounded-full bg-white/50" />
-        <div className="mt-1 h-1.5 w-3/5 rounded-full bg-white/20" />
-        <div className="mt-2 h-3 rounded-md" style={{ background: 'var(--c)' }} />
-      </Frame>
-    </div>
+    <Frame className="h-full w-full p-3">
+      <div className="flex items-center justify-between">
+        <span className="text-[0.55rem] font-semibold uppercase tracking-wider text-white/50">Funil de vendas</span>
+        <span className="rounded-full px-1.5 text-[0.5rem] font-bold text-[#021024]" style={{ background: 'var(--c)' }}>CRM</span>
+      </div>
+      <div className="mt-2 grid grid-cols-3 gap-1.5">
+        {cols.map((c, ci) => (
+          <div key={c.t} className="rounded-md border border-white/[0.07] bg-white/[0.03] p-1.5">
+            <div className="mb-1.5 text-[0.48rem] text-white/45">{c.t}</div>
+            <div className="space-y-1">
+              {Array.from({ length: c.n }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-4 rounded border border-white/10 bg-white/[0.05] px-1 transition-[transform,background-color] duration-700 ease-[var(--ease-out)]"
+                  style={
+                    ci === 0 && i === 0
+                      ? { transform: 'translateX(calc(var(--k,0) * 200%))', background: tone(40), borderColor: tone(70) }
+                      : undefined
+                  }
+                >
+                  <div className="mt-1 h-1 w-3/4 rounded-full bg-white/30" />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </Frame>
   )
 }
 
-const map: Record<ServiceId, () => React.ReactElement> = { sites: Sites, landing: Landing, leads: Leads, trafego: Trafego, criativos: Criativos }
+function Automacoes() {
+  const nodes = [
+    { x: 14, label: 'Formulário' },
+    { x: 50, label: 'CRM' },
+    { x: 86, label: 'WhatsApp' },
+  ]
+  return (
+    <Frame className="h-full w-full p-3">
+      <svg viewBox="0 0 100 60" className="h-[70%] w-full overflow-visible">
+        <path d="M14 26 H86" stroke="white" strokeOpacity="0.1" strokeWidth="1.5" strokeDasharray="2 2" />
+        <path d="M14 26 H86" stroke="var(--c)" strokeWidth="1.8" strokeLinecap="round" pathLength="1" strokeDasharray="1" className="transition-[stroke-dashoffset] duration-1000 ease-[var(--ease-out)] [stroke-dashoffset:calc(0.55-var(--k,0)*0.55)]" />
+        {nodes.map((n) => (
+          <g key={n.label}>
+            <circle cx={n.x} cy="26" r="8" fill="#0b1b2a" stroke="var(--c)" strokeWidth="1.5" />
+            <circle cx={n.x} cy="26" r="2.4" fill="var(--c)" />
+            <text x={n.x} y="46" textAnchor="middle" fontSize="5.5" fill="white" fillOpacity="0.65">{n.label}</text>
+          </g>
+        ))}
+      </svg>
+      <div className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-2 py-1.5 text-[0.55rem] text-white/80 transition-opacity duration-700 [opacity:calc(0.4+var(--k,0)*0.6)]">
+        <span className="grid size-3.5 place-items-center rounded-full text-[0.5rem] text-[#021024]" style={{ background: 'var(--c)' }}>✓</span>
+        Mensagem enviada automaticamente
+      </div>
+    </Frame>
+  )
+}
+
+const map: Record<ServiceId, () => React.ReactElement> = { sites: Sites, landing: Landing, leads: Leads, trafego: Trafego, crm: Crm, automacoes: Automacoes }
 
 export function ServiceVisual({ id }: { id: ServiceId }) {
   const V = map[id]

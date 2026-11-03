@@ -72,7 +72,7 @@ export function Hero() {
           <motion.span
             aria-hidden="true"
             className="mt-7 block h-px w-full max-w-md origin-left"
-            style={{ background: 'linear-gradient(90deg, var(--cc-violet), var(--accent-b), var(--accent-a), transparent)' }}
+            style={{ background: 'linear-gradient(90deg, var(--cc-royal), var(--accent-b), var(--accent-a), transparent)' }}
             initial={reduce ? false : { scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.9, delay: 0.85, ease }}
@@ -85,7 +85,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.85, ease }}
           >
-            Soluções digitais pensadas para fortalecer sua presença, gerar oportunidades e ajudar sua empresa a crescer.
+            Do primeiro clique até a venda: sites, landing pages e Meta Ads para atrair clientes, e CRM e automações para nenhum contato se perder.
           </motion.p>
 
           <motion.div

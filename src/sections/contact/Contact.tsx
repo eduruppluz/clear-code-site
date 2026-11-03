@@ -7,9 +7,9 @@ import { site } from '../../config/site'
 const ease = [0.22, 1, 0.36, 1] as const
 
 const channels = [
-  { name: 'WhatsApp', detail: site.contact.whatsappDisplay, href: site.contact.whatsappUrl, color: palette.aqua, note: 'Canal mais rápido para conversar' },
-  { name: 'Instagram', detail: site.contact.instagramHandle, href: site.contact.instagramUrl, color: palette.magenta, note: 'Acompanhe e mande uma mensagem' },
-  { name: 'E-mail', detail: site.contact.email, href: `mailto:${site.contact.email}`, color: palette.blue, note: 'Para propostas e detalhes do projeto' },
+  { name: 'WhatsApp', detail: site.contact.whatsappDisplay, href: site.contact.whatsappUrl, color: palette.gelo, note: 'Canal mais rápido para conversar' },
+  { name: 'Instagram', detail: site.contact.instagramHandle, href: site.contact.instagramUrl, color: palette.aco, note: 'Acompanhe e mande uma mensagem' },
+  { name: 'E-mail', detail: site.contact.email, href: `mailto:${site.contact.email}`, color: palette.azul, note: 'Para propostas e detalhes do projeto' },
 ]
 
 function ChannelIcon({ name }: { name: string }) {
@@ -29,7 +29,7 @@ export function ContactChannels() {
       {channels.map((ch, i) => (
         <motion.li key={ch.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08, ease }}>
           <a href={ch.href} target="_blank" rel="noopener" className="glow-card is-interactive group flex items-center gap-5 p-5 sm:p-6" style={{ ['--c' as string]: ch.color }}>
-            <span className="grid size-12 shrink-0 place-items-center rounded-xl border bg-white/[0.03] transition-colors duration-300 group-hover:bg-[color:var(--c)] group-hover:text-[#020B16]" style={{ borderColor: `${ch.color}66`, color: ch.color }}>
+            <span className="grid size-12 shrink-0 place-items-center rounded-xl border bg-white/[0.03] transition-colors duration-300 group-hover:bg-[color:var(--c)] group-hover:text-[#021024]" style={{ borderColor: `${ch.color}66`, color: ch.color }}>
               <ChannelIcon name={ch.name} />
             </span>
             <span className="min-w-0 flex-1">
@@ -89,9 +89,9 @@ export function ContactForm() {
         <label className="block text-sm font-medium sm:col-span-2">
           O que você precisa?
           <select name="service" className={`${field} appearance-none`} defaultValue="">
-            <option value="" className="bg-[#06121f]">Selecione uma opção</option>
-            {services.map((s) => <option key={s.id} className="bg-[#06121f]">{s.title}</option>)}
-            <option className="bg-[#06121f]">Ainda não sei — quero conversar</option>
+            <option value="" className="bg-[#0b1b2a]">Selecione uma opção</option>
+            {services.map((s) => <option key={s.id} className="bg-[#0b1b2a]">{s.title}</option>)}
+            <option className="bg-[#0b1b2a]">Ainda não sei — quero conversar</option>
           </select>
         </label>
         <label className="block text-sm font-medium sm:col-span-2">
@@ -99,11 +99,11 @@ export function ContactForm() {
           <textarea name="message" required rows={5} className={`${field} resize-y`} placeholder="Qual é a sua ideia, necessidade ou desafio?" />
         </label>
       </div>
-      <p role="alert" aria-live="polite" className="mt-4 min-h-5 text-sm" style={{ color: palette.magenta }}>{error}</p>
+      <p role="alert" aria-live="polite" className="mt-4 min-h-5 text-sm" style={{ color: '#FF9A9A' }}>{error}</p>
       <button
         type="submit"
         className="mt-2 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full font-semibold text-white shadow-[0_10px_36px_-10px_var(--accent-a)] transition-transform duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
-        style={{ background: 'linear-gradient(100deg, color-mix(in oklab, var(--accent-b) 85%, black), color-mix(in oklab, var(--accent-a) 80%, black))' }}
+        style={{ background: 'linear-gradient(100deg, var(--cc-royal), color-mix(in oklab, var(--accent-a) 18%, var(--cc-royal)))' }}
       >
         Enviar pelo WhatsApp
         <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" /></svg>

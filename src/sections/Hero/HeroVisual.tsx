@@ -4,11 +4,11 @@ import { ParticleField } from './ParticleField'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-/** Chips que flutuam ao redor da lâmpada — a sequência ideia → estratégia → código */
+/** Chips que flutuam ao redor da lâmpada — o caminho atrair → captar → organizar */
 const chips = [
-  { label: 'Ideia', pos: 'left-[2%] top-[22%] sm:left-[4%]', delay: 0.95, float: 'float-1' },
-  { label: 'Estratégia', pos: 'right-[0%] top-[38%] sm:right-[2%]', delay: 1.05, float: 'float-2' },
-  { label: '</> Código', pos: 'left-[10%] bottom-[18%] sm:left-[12%]', delay: 1.15, float: 'float-3', mono: true },
+  { label: 'Atrair', pos: 'left-[0%] top-[20%] sm:left-[2%]', delay: 0.95, float: 'float-1' },
+  { label: 'Captar', pos: 'right-[0%] top-[42%] sm:right-[0%]', delay: 1.05, float: 'float-2' },
+  { label: 'Organizar', pos: 'left-[6%] bottom-[16%] sm:left-[8%]', delay: 1.15, float: 'float-3' },
 ]
 
 export function HeroVisual() {
@@ -77,9 +77,11 @@ export function HeroVisual() {
         />
       </motion.div>
 
-      {/* 5. a lâmpada (vetor oficial, traço fino) */}
-      <div className="absolute left-1/2 top-[44%] w-[46%] -translate-x-1/2 -translate-y-1/2">
-        <LogoMark intro delay={0.2} weight={0.7} className="w-full" />
+      {/* 5. a lâmpada (símbolo oficial colorido) */}
+      <div className="absolute left-1/2 top-[44%] w-[50%] -translate-x-1/2 -translate-y-1/2">
+        <div className="motion-safe:animate-[bob_6s_ease-in-out_infinite]">
+          <LogoMark intro delay={0.2} className="w-full" />
+        </div>
       </div>
 
       {/* 6. chips */}
@@ -93,14 +95,15 @@ export function HeroVisual() {
         >
           <div
             style={{ animation: reduce ? undefined : `${c.float} 7s ease-in-out infinite` }}
-            className={`flex items-center gap-2 rounded-full border border-white/10 bg-[#06121f]/70 px-3.5 py-2 text-xs text-white/85 shadow-[0_10px_30px_-12px_rgb(0_0_0/0.8)] backdrop-blur-md sm:text-[0.8rem]`}>
+            className={`flex items-center gap-2 rounded-full border border-white/10 bg-[#0b1b2a]/70 px-3.5 py-2 text-xs text-white/85 shadow-[0_10px_30px_-12px_rgb(0_0_0/0.8)] backdrop-blur-md sm:text-[0.8rem]`}>
             <span className="size-1.5 rounded-full" style={{ background: 'var(--accent-a)', boxShadow: '0 0 8px var(--accent-a)' }} />
-            <span className={c.mono ? 'font-mono tracking-tight' : ''}>{c.label}</span>
+            <span>{c.label}</span>
           </div>
         </motion.div>
       ))}
 
       <style>{`
+        @keyframes bob { 0%,100% { translate: 0 0 } 50% { translate: 0 -8px } }
         @keyframes halo { 0%,100% { opacity: .75; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
         @keyframes float-1 { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
         @keyframes float-2 { 0%,100% { transform: translateY(0) } 50% { transform: translateY(7px) } }

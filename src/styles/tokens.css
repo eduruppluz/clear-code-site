@@ -22,30 +22,31 @@
 
 :root {
   /* — Paleta base da marca — */
-  --cc-ink: #020b16;          /* fundo principal */
+  --cc-ink: #021024;          /* marinho — fundo principal */
   --cc-white: #ffffff;
-  --cc-graphite: #111827;
-  --cc-blue: #176bff;         /* azul elétrico */
-  --cc-cyan: #08bfe8;         /* ciano */
-  --cc-violet: #4b2cff;       /* violeta (só luz/borda — contraste baixo p/ texto) */
-  --cc-violet-text: #8b7bff;  /* violeta legível sobre o fundo */
-  --cc-blue-text: #5b9bff;    /* azul legível em textos pequenos */
+  --cc-graphite: #11212d;     /* grafite azulado */
+  --cc-royal: #2563eb;        /* azul-royal — base da lâmpada, botões */
+  --cc-azul: #4aa3ff;         /* azul vivo */
+  --cc-ceu: #6cc0ff;          /* azul-céu — órbitas */
+  --cc-gelo: #c1e8ff;         /* azul-gelo — destaques claros */
+  --cc-aco: #5483b3;          /* azul-aço — apoio */
+  --cc-nevoa: #7da0ca;        /* névoa — texto secundário no escuro */
 
   /* — Superfícies e texto — */
-  --surface-1: #06121f;
-  --surface-2: #0a1828;
+  --surface-1: #06141b;
+  --surface-2: #11212d;
   --line: rgb(255 255 255 / 0.08);
   --line-strong: rgb(255 255 255 / 0.14);
   --text: #ffffff;
-  --text-muted: #a7b3c4;
-  --text-dim: #6b7a8f;
+  --text-muted: #a9b8c9;
+  --text-dim: #6f8196;
 
   /* — Gradiente oficial — */
-  --grad-brand: linear-gradient(100deg, var(--cc-violet) 0%, var(--cc-blue) 52%, var(--cc-cyan) 100%);
+  --grad-brand: linear-gradient(100deg, var(--cc-royal) 0%, var(--cc-azul) 50%, var(--cc-gelo) 100%);
 
   /* — Acento dinâmico (valores iniciais = Hero). Atualizados via JS. — */
-  --accent-a: #08bfe8;
-  --accent-b: #176bff;
+  --accent-a: #6cc0ff;
+  --accent-b: #2563eb;
   --glow: 1;                  /* 0..1.4 — intensidade de luz da seção */
   --grad-accent: linear-gradient(100deg, var(--accent-b), var(--accent-a));
 

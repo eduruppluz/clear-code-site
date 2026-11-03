@@ -43,7 +43,7 @@ export function ProjectMockup({ project }: { project: Project }) {
           </span>
           <span className="w-10" />
         </div>
-        <img src={project.images.desktop} alt={project.images.desktopAlt} loading="lazy" decoding="async" className="block w-full" width={1885} height={882} />
+        <img src={project.images.desktop} alt={project.images.desktopAlt} loading="lazy" decoding="async" className="block h-auto w-full" />
         <figcaption className="sr-only">{project.images.desktopAlt}</figcaption>
       </motion.figure>
 

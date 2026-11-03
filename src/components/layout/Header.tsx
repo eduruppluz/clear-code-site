@@ -48,7 +48,7 @@ export function Header() {
       <div
         className={`relative z-10 mx-auto flex h-[var(--header-h)] max-w-[calc(var(--container)+2rem)] items-center justify-between gap-4 rounded-2xl px-4 transition-[background-color,border-color,box-shadow,height] duration-500 ease-[var(--ease-out)] sm:px-6 ${
           scrolled || open
-            ? '!h-16 border border-white/[0.07] bg-[#020B16]/75 shadow-[0_12px_40px_-20px_rgb(0_0_0/0.8)] backdrop-blur-xl'
+            ? '!h-16 border border-white/[0.07] bg-[#021024]/75 shadow-[0_12px_40px_-20px_rgb(0_0_0/0.8)] backdrop-blur-xl'
             : 'border border-transparent'
         }`}
       >
@@ -110,7 +110,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-0 flex flex-col bg-[#020B16]/95 px-6 pb-10 pt-28 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-0 flex flex-col bg-[#021024]/95 px-6 pb-10 pt-28 backdrop-blur-xl lg:hidden"
           >
             <nav aria-label="Menu móvel" className="flex-1">
               <ul className="flex flex-col gap-1">

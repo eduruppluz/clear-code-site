@@ -42,8 +42,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     let lastT = 0
 
     // estado exibido (OKLab) e alvo
-    const init = hexToOklab('#08BFE8')
-    const cur = { a: init, b: hexToOklab('#176BFF'), g: 1.2 }
+    const init = hexToOklab('#6CC0FF')
+    const cur = { a: init, b: hexToOklab('#2563EB'), g: 1.15 }
     const tgt = { a: cur.a, b: cur.b, g: cur.g }
     let written = { a: '', b: '', g: '' }
 

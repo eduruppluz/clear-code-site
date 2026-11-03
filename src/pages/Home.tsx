@@ -6,7 +6,7 @@ import { themes } from '../config/themes'
 import { Hero } from '../sections/Hero/Hero'
 import { Process } from '../sections/process/Process'
 import { ProjectCase } from '../sections/projects/ProjectCase'
-import { ServicesGrid } from '../sections/services/ServicesGrid'
+import { ServicesGrid, StageStrip } from '../sections/services/ServicesGrid'
 import { FinalCTA } from '../sections/shared/FinalCTA'
 import { Pillars } from '../sections/shared/Pillars'
 import { Themed } from '../theme/Themed'
@@ -44,15 +44,18 @@ export default function Home() {
           <SectionHeading
             id="solucoes-title"
             eyebrow="Soluções"
-            title={<>Soluções digitais para diferentes momentos do <span className="text-gradient">seu negócio</span>.</>}
-            lead="Oferecemos um portfólio completo de soluções para impulsionar presença, atrair clientes e gerar resultados."
+            title={<>Do primeiro clique <span className="text-gradient">até a venda</span>.</>}
+            lead="Cuidamos do caminho completo do seu cliente: ele te encontra, entra em contato e é acompanhado até fechar negócio."
           />
+          <div className="mt-14">
+            <StageStrip />
+          </div>
           <div className="mt-14">
             <ServicesGrid />
           </div>
           <Reveal className="mt-10 flex flex-col items-start justify-between gap-6 border-t border-white/[0.07] pt-8 sm:flex-row sm:items-center">
             <p className="font-display text-lg font-semibold sm:text-xl">
-              <span className="text-gradient">Estratégia</span> + <span className="text-gradient">tecnologia</span> + <span className="text-gradient">execução</span> trabalhando juntas.
+              <span className="text-gradient">Atrair</span> + <span className="text-gradient">captar</span> + <span className="text-gradient">organizar</span>, tudo num só lugar.
             </p>
             <Button to="/solucoes" arrow>Ver todas as soluções</Button>
           </Reveal>

@@ -1,10 +1,10 @@
 /**
- * Paleta de acentos e "temas" de cor.
+ * Paleta de acentos e "temas" de cor — Identidade 2.0.
  *
- * As cores-base vêm do manual (#176BFF, #08BFE8, #4B2CFF). Para que a troca
- * de cor entre páginas/etapas seja perceptível (como na referência), usamos
- * também tons DERIVADOS dessas três — aqua (ciano → verde), lilás (violeta
- * mais claro, legível no escuro) e magenta (violeta → rosa).
+ * Toda a paleta é derivada da logo nova (lâmpada azul com órbitas):
+ * do azul-gelo do topo do bulbo ao azul-royal da base, mais o azul-aço
+ * da paleta de apoio. A cor continua mudando por seção/etapa, mas sempre
+ * dentro da família do azul — mais sóbrio e mais "Clear".
  *
  * Um tema = { a, b, glow }. O motor (src/theme) interpola entre os temas
  * dos blocos marcados com <Themed> conforme o scroll e ao trocar de página.
@@ -12,13 +12,13 @@
 export type Theme = { a: string; b: string; glow: number }
 
 export const palette = {
-  aqua: '#12D6C1',
-  cyan: '#08BFE8',
-  sky: '#3FA2FF',
-  blue: '#176BFF',
-  lilac: '#7B5CFF',
-  violet: '#4B2CFF',
-  magenta: '#B04DFF',
+  gelo: '#BFE6FF',     // topo do bulbo — destaques claros
+  ceu: '#6CC0FF',      // órbitas
+  nevoa: '#7DA0CA',    // apoio, textos secundários
+  azul: '#4AA3FF',     // azul vivo
+  royal: '#2563EB',    // base do bulbo — botões e destaques fortes
+  profundo: '#3B4FD8', // azul-índigo, para variar sem sair da família
+  aco: '#5483B3',      // azul-aço (paleta de apoio)
 } as const
 
 const t = (a: string, b: string, glow = 1): Theme => ({ a, b, glow })
@@ -26,28 +26,28 @@ const p = palette
 
 export const themes = {
   // Início
-  hero: t(p.cyan, p.blue, 1.2),
-  pillars: t(p.sky, p.blue, 0.9),
-  servicesTeaser: t(p.lilac, p.violet, 1),
-  projectTeaser: t(p.aqua, p.cyan, 1),
-  cta: t(p.cyan, p.lilac, 1.15),
+  hero: t(p.ceu, p.royal, 1.15),
+  pillars: t(p.azul, p.royal, 0.85),
+  servicesTeaser: t(p.gelo, p.azul, 0.95),
+  projectTeaser: t(p.ceu, p.profundo, 0.95),
+  cta: t(p.gelo, p.royal, 1.1),
 
   // Processo — uma cor por etapa
-  step1: t(p.aqua, p.aqua, 1.1),
-  step2: t(p.cyan, p.cyan, 1.1),
-  step3: t(p.blue, p.blue, 1.1),
-  step4: t(p.lilac, p.lilac, 1.15),
-  step5: t(p.magenta, p.magenta, 1.15),
+  step1: t(p.gelo, p.gelo, 1.05),
+  step2: t(p.ceu, p.ceu, 1.05),
+  step3: t(p.azul, p.azul, 1.1),
+  step4: t(p.royal, p.royal, 1.1),
+  step5: t(p.profundo, p.profundo, 1.1),
 
   // Páginas
-  solucoes: t(p.lilac, p.violet, 1.1),
-  principios: t(p.magenta, p.lilac, 1),
-  projetos: t(p.aqua, p.cyan, 1.1),
-  sobre: t(p.sky, p.blue, 1.1),
-  dna1: t(p.lilac, p.violet, 1.25),
-  dna2: t(p.blue, p.lilac, 1.25),
-  dna3: t(p.cyan, p.blue, 1.25),
-  contato: t(p.magenta, p.blue, 1.15),
+  solucoes: t(p.gelo, p.azul, 1),
+  principios: t(p.nevoa, p.profundo, 0.95),
+  projetos: t(p.ceu, p.royal, 1.05),
+  sobre: t(p.azul, p.profundo, 1.05),
+  dna1: t(p.nevoa, p.profundo, 1.15),
+  dna2: t(p.azul, p.royal, 1.2),
+  dna3: t(p.gelo, p.azul, 1.2),
+  contato: t(p.ceu, p.royal, 1.1),
 } satisfies Record<string, Theme>
 
 export const encodeTheme = (th: Theme) => `${th.a},${th.b},${th.glow}`
