@@ -58,7 +58,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease }}
           >
-            Tecnologia e soluções digitais
+            Ideias que conectam. Tecnologia que transforma.
           </motion.p>
 
           <h1
@@ -89,12 +89,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.85, ease }}
           >
-            <span className="block font-display text-[clamp(1.15rem,2vw,1.45rem)] font-bold leading-snug text-white">
-              Do primeiro clique ao contato bem acompanhado.
-            </span>
-            <span className="mt-2 block">
-              Sites, anúncios e automações para atrair clientes, captar contatos e organizar oportunidades comerciais.
-            </span>
+            Sites, anúncios e automações para conectar seu negócio aos clientes e organizar oportunidades comerciais.
           </motion.p>
 
           <motion.div

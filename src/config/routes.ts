@@ -14,7 +14,7 @@ export const pageMeta: Record<string, { title: string; description: string }> = 
   '/': {
     title: 'Clear Code ERL — Tecnologia para transformar o seu negócio',
     description:
-      'Sites, anúncios e automações para atrair clientes, captar contatos e organizar oportunidades comerciais. Do primeiro clique ao contato bem acompanhado.',
+      'Ideias que conectam. Tecnologia que transforma. Sites, anúncios e automações para conectar seu negócio aos clientes e organizar oportunidades comerciais.',
   },
   '/solucoes': {
     title: 'Soluções — Clear Code ERL',
@@ -26,7 +26,7 @@ export const pageMeta: Record<string, { title: string; description: string }> = 
   },
   '/sobre': {
     title: 'Sobre — Clear Code ERL',
-    description: 'Na Clear Code ERL, entendemos o seu negócio antes de escrever qualquer linha de código.',
+    description: 'Ideias que conectam. Tecnologia que transforma. Na Clear Code ERL, entendemos o seu negócio antes de escrever qualquer linha de código.',
   },
   '/contato': {
     title: 'Contato — Clear Code ERL',

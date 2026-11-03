@@ -13,7 +13,7 @@ export default function Sobre() {
       <PageHero
         theme={themes.sobre}
         eyebrow="Sobre a Clear Code ERL"
-        title={<>Tecnologia que faz sentido para o <span className="text-gradient">seu negócio</span>.</>}
+        title={<>Ideias que conectam.<br /><span className="text-gradient">Tecnologia que transforma.</span></>}
         lead="Na Clear Code ERL, entendemos o seu negócio antes de escrever qualquer linha de código. Transformamos desafios reais em soluções digitais que geram valor de forma clara e eficiente."
       />
 

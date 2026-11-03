@@ -11,7 +11,7 @@ export const pillars = [
 export type ServiceId = 'sites' | 'landing' | 'trafego' | 'leads' | 'crm' | 'automacoes'
 export type Stage = 'Atrair' | 'Captar' | 'Organizar'
 
-/** As 3 etapas do caminho do cliente — "do primeiro clique ao contato bem acompanhado" */
+/** As 3 etapas do caminho do cliente: atrair, captar e organizar */
 export const stages: { name: Stage; text: string; color: string }[] = [
   { name: 'Atrair', text: 'Sites, landing pages e Meta Ads para que potenciais clientes encontrem o negócio.', color: palette.aqua },
   { name: 'Captar', text: 'Formulários, WhatsApp e páginas de conversão para transformar o interesse em contatos.', color: palette.azul },

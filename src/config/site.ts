@@ -10,7 +10,9 @@ export const site = {
   name: 'Clear Code ERL',
   tagline: 'Tecnologia para transformar o seu negócio.',
   signature: 'Da ideia ao código.',
-  description: 'Do primeiro clique ao contato bem acompanhado.',
+  description: 'Ideias que conectam. Tecnologia que transforma.',
+  /** texto de apoio da página inicial e da descrição para o Google */
+  pitch: 'Sites, anúncios e automações para conectar seu negócio aos clientes e organizar oportunidades comerciais.',
   url: 'https://ctbadigital.com',
   founder: 'Eduardo Rupp da Luz',
   contact: {
