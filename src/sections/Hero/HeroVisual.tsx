@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as RPointerEvent } from 'react'
-import { animate, motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react'
+import { useEffect, useState, type CSSProperties } from 'react'
+import { animate, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react'
 import { palette } from '../../config/themes'
 import { hexHue } from '../../theme/color'
 import simbolo from '../../assets/brand/simbolo-colorido.webp'
@@ -19,18 +19,26 @@ const ease = [0.22, 1, 0.36, 1] as const
  * 5. Com mouse, a cena inteira inclina e as camadas se movem em profundidades
  *    diferentes (parallax).
  * Tudo usa --accent-a/-b e --logo-hue, então muda de cor junto com o site.
- * 6. Interativa: arrastar (mouse ou dedo) gira a lâmpada em 360° com inércia,
- *    o scroll também gira, e cada clique/toque troca a cor da cena.
+ * 6. Interativa: cada clique/toque faz a lâmpada dar uma volta completa
+ *    e troca a cor da cena (12 cores).
  * Com "reduzir movimento", mostra a cena já acesa e parada.
  */
 
 // ciclo de cores do clique: [destaque, secundária]
+// (paleta própria do clique — vai além das cores das seções)
 const CLICK_COLORS: [string, string][] = [
-  [palette.lilas, palette.violeta],
-  [palette.magenta, palette.lilas],
-  [palette.aqua, palette.ciano],
-  [palette.azul, palette.royal],
-  [palette.ciano, palette.royal],
+  [palette.lilas, palette.violeta],   // lilás
+  ['#FF4FB8', '#B04DFF'],             // rosa neon
+  ['#FF6B4A', '#E0245E'],             // coral
+  ['#FFB020', '#FF6B2C'],             // âmbar
+  ['#FFE14D', '#F59E0B'],             // amarelo
+  ['#9BE15D', '#22C55E'],             // lima
+  ['#2EE59D', '#0EA5A4'],             // esmeralda
+  [palette.aqua, palette.ciano],      // aqua
+  ['#7DD3FC', '#3B82F6'],             // céu
+  ['#A78BFA', '#6D28D9'],             // ametista
+  ['#F472B6', '#7C3AED'],             // pôr do sol
+  [palette.ciano, palette.royal],     // oficial
 ]
 const LOGO_HUE = 191
 
@@ -132,44 +140,19 @@ export function HeroVisual() {
     return () => window.removeEventListener('pointermove', on)
   }, [fine, reduce, mx, my])
 
-  // ── interação: girar (arrasto + scroll) e trocar cor (clique) ──
+  // ── interação: clique/toque → dá uma volta e troca a cor ──
   const spin = useMotionValue(0)
-  const { scrollY } = useScroll()
-  const scrollSpin = useTransform(scrollY, [0, 900], [0, reduce ? 0 : 360])
-  const lampRotate = useTransform(() => spin.get() + scrollSpin.get())
-  const drag = useRef<{ x: number; t: number; v: number; moved: number } | null>(null)
   const [colorIdx, setColorIdx] = useState(-1)
   const [bursts, setBursts] = useState<number[]>([])
   const [touched, setTouched] = useState(false)
 
-  const onDown = (e: RPointerEvent<HTMLDivElement>) => {
-    drag.current = { x: e.clientX, t: performance.now(), v: 0, moved: 0 }
-    spin.stop()
-    e.currentTarget.setPointerCapture(e.pointerId)
-  }
-  const onMove = (e: RPointerEvent<HTMLDivElement>) => {
-    const d = drag.current
-    if (!d) return
-    const now = performance.now()
-    const dx = e.clientX - d.x
-    spin.set(spin.get() + dx * 0.8)
-    d.v = (dx * 0.8) / Math.max(1, now - d.t) * 1000
-    d.moved += Math.abs(dx)
-    d.x = e.clientX
-    d.t = now
-  }
-  const onUp = () => {
-    const d = drag.current
-    drag.current = null
-    if (!d) return
+  const onTap = () => {
     setTouched(true)
-    if (d.moved < 6) {
-      // clique / toque → próxima cor + onda de luz
-      setColorIdx((i) => (i + 1) % CLICK_COLORS.length)
-      setBursts((b) => [...b.slice(-3), Date.now()])
-      if (!reduce) animate(spin, spin.get() + 360, { duration: 0.9, ease })
-    } else if (!reduce) {
-      animate(spin, spin.get(), { type: 'inertia', velocity: d.v, power: 0.35, timeConstant: 420 })
+    setColorIdx((i) => (i + 1) % CLICK_COLORS.length)
+    setBursts((b) => [...b.slice(-3), Date.now()])
+    if (!reduce) {
+      const target = Math.round(spin.get() / 360) * 360 + 360
+      animate(spin, target, { duration: 0.9, ease })
     }
   }
 
@@ -182,7 +165,10 @@ export function HeroVisual() {
           let h = hexHue(a) - LOGO_HUE
           if (h > 180) h -= 360
           if (h < -180) h += 360
-          return { ['--accent-a' as string]: a, ['--accent-b' as string]: b, ['--logo-hue' as string]: `${h}deg` }
+          // tons quentes ficam "barrentos" girando o azul: compensa com mais brilho
+          const hue = hexHue(a)
+          const bright = hue > 25 && hue < 110 ? 1.35 : hue <= 25 || hue > 300 ? 1.12 : 1
+          return { ['--accent-a' as string]: a, ['--accent-b' as string]: b, ['--logo-hue' as string]: `${h}deg`, ['--logo-bright' as string]: bright }
         })()
 
   const after = (d = 0) => (reduce ? {} : { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.9, delay: IGNITE + d, ease } })
@@ -246,12 +232,10 @@ export function HeroVisual() {
 
         {/* a lâmpada */}
         <motion.div
-          className="absolute left-1/2 top-[13%] z-10 w-[50%] -translate-x-1/2 cursor-grab touch-pan-y select-none active:cursor-grabbing"
+          className="absolute left-1/2 top-[13%] z-10 w-[50%] -translate-x-1/2 cursor-pointer select-none [-webkit-tap-highlight-color:transparent]"
           style={{ x: lampX, y: lampY }}
-          onPointerDown={onDown}
-          onPointerMove={onMove}
-          onPointerUp={onUp}
-          onPointerCancel={() => (drag.current = null)}
+          onClick={onTap}
+          whileTap={reduce ? undefined : { scale: 0.96 }}
         >
           <div className="motion-safe:animate-[bob_6s_ease-in-out_infinite]">
             <motion.div
@@ -279,7 +263,7 @@ export function HeroVisual() {
                   })}
             >
               <div className="[perspective:900px]">
-                <motion.div className="relative [transform-style:preserve-3d]" style={{ rotateY: lampRotate }}>
+                <motion.div className="relative [transform-style:preserve-3d]" style={{ rotateY: spin }}>
                   {/* frente */}
                   <img
                     src={simbolo}
@@ -288,7 +272,7 @@ export function HeroVisual() {
                     width={760}
                     height={854}
                     className="block h-auto w-full [backface-visibility:hidden]"
-                    style={{ filter: 'hue-rotate(var(--logo-hue, 0deg)) drop-shadow(0 0 calc(var(--glow) * 22px) color-mix(in oklab, var(--accent-a) 55%, transparent))', transition: 'filter .5s' }}
+                    style={{ filter: 'hue-rotate(var(--logo-hue, 0deg)) brightness(var(--logo-bright, 1)) drop-shadow(0 0 calc(var(--glow) * 22px) color-mix(in oklab, var(--accent-a) 55%, transparent))', transition: 'filter .5s' }}
                   />
                   {/* verso (espelhado para o </> continuar legível) */}
                   <img
@@ -298,7 +282,7 @@ export function HeroVisual() {
                     width={760}
                     height={854}
                     className="absolute inset-0 block h-auto w-full [backface-visibility:hidden] [transform:rotateY(180deg)_scaleX(-1)]"
-                    style={{ filter: 'hue-rotate(var(--logo-hue, 0deg)) drop-shadow(0 0 calc(var(--glow) * 22px) color-mix(in oklab, var(--accent-a) 55%, transparent))', transition: 'filter .5s' }}
+                    style={{ filter: 'hue-rotate(var(--logo-hue, 0deg)) brightness(var(--logo-bright, 1)) drop-shadow(0 0 calc(var(--glow) * 22px) color-mix(in oklab, var(--accent-a) 55%, transparent))', transition: 'filter .5s' }}
                   />
                 </motion.div>
               </div>
@@ -306,7 +290,7 @@ export function HeroVisual() {
             {/* reflexo no chão */}
             <motion.img
               style={{
-                rotateY: lampRotate,
+                rotateY: spin,
                 filter: 'hue-rotate(var(--logo-hue, 0deg))',
                 maskImage: 'linear-gradient(to top, black, transparent 38%)',
                 WebkitMaskImage: 'linear-gradient(to top, black, transparent 38%)',
@@ -371,7 +355,7 @@ export function HeroVisual() {
         >
           <span className="flex items-center gap-2 rounded-full border border-white/10 bg-[#0b1b2a]/70 px-3.5 py-1.5 text-xs text-white/75 backdrop-blur-md">
             <svg viewBox="0 0 20 20" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M15.5 6.5A6.5 6.5 0 1 0 16.5 12" /><path d="M16 3v4h-4" /></svg>
-            {fine ? 'Arraste para girar · clique para mudar a cor' : 'Gire com o dedo · toque para mudar a cor'}
+            {fine ? 'Clique na lâmpada para mudar a cor' : 'Toque na lâmpada para mudar a cor'}
           </span>
         </motion.div>
 
