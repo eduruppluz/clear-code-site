@@ -5,6 +5,7 @@ import { Container } from '../../components/ui/Container'
 import { HeroVisual } from './HeroVisual'
 import { themes } from '../../config/themes'
 import { Themed } from '../../theme/Themed'
+import { useIsDesktop } from '../../hooks/useMediaQuery'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -35,6 +36,9 @@ export function Hero() {
   const visualY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '18%'])
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '10%'])
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0])
+  // No celular a lâmpada fica embaixo do texto: ela não pode apagar nem deslizar
+  // enquanto a pessoa rola até ela. O efeito de saída fica só no computador.
+  const desktop = useIsDesktop()
 
   // sequência: elementos (0) → lâmpada acende (0.2) → título (0.35) → gradiente (≈1.0) → CTAs (1.0)
   return (
@@ -103,7 +107,7 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div style={{ y: visualY, opacity: fade }} className="relative -mx-4 sm:mx-0">
+        <motion.div style={desktop ? { y: visualY, opacity: fade } : undefined} className="relative -mx-4 sm:mx-0">
           <HeroVisual />
         </motion.div>
       </Container>
