@@ -71,8 +71,10 @@ export default function Home() {
             eyebrow="Projetos"
             title={<>Projetos que transformam ideias em <span className="text-gradient">experiências digitais</span>.</>}
           />
-          <div className="mt-14 lg:mt-20">
-            <ProjectCase project={projects[0]} compact />
+          <div className="mt-14 grid gap-24 lg:mt-20 lg:gap-32">
+            {projects.slice(0, 2).map((p, i) => (
+              <ProjectCase key={p.slug} project={p} index={i} compact showAll={i === 1} reverse={i % 2 === 1} />
+            ))}
           </div>
         </Container>
       </Themed>

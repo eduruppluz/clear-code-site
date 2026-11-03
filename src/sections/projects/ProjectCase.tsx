@@ -4,10 +4,10 @@ import type { Project } from '../../config/projects'
 import { ProjectMockup } from './ProjectMockup'
 
 /** Case completo (página Projetos) ou resumido (destaque na Início) */
-export function ProjectCase({ project, index = 0, compact = false }: { project: Project; index?: number; compact?: boolean }) {
+export function ProjectCase({ project, index = 0, compact = false, showAll = compact, reverse = false }: { project: Project; index?: number; compact?: boolean; showAll?: boolean; reverse?: boolean }) {
   return (
-    <article className="grid items-center gap-12 lg:grid-cols-[1fr_1.35fr] lg:gap-16" aria-labelledby={`proj-${project.slug}`}>
-      <Reveal className="lg:order-1">
+    <article className={`grid items-center gap-12 lg:gap-16 ${reverse ? 'lg:grid-cols-[1.35fr_1fr]' : 'lg:grid-cols-[1fr_1.35fr]'}`} aria-labelledby={`proj-${project.slug}`}>
+      <Reveal className={reverse ? 'lg:order-2' : 'lg:order-1'}>
         <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]">
           <span className="tabular-nums" style={{ color: 'var(--accent-a)' }}>{String(index + 1).padStart(2, '0')}</span>
           <span className="h-px w-8 bg-white/20" />
@@ -43,11 +43,11 @@ export function ProjectCase({ project, index = 0, compact = false }: { project: 
           <Button href={project.url} target="_blank" rel="noopener" arrow aria-label={`Ver projeto ${project.name} (abre em nova guia)`}>
             Ver projeto
           </Button>
-          {compact && <Button to="/projetos" variant="ghost">Ver todos os projetos</Button>}
+          {showAll && <Button to="/projetos" variant="ghost">Ver todos os projetos</Button>}
         </div>
       </Reveal>
 
-      <Reveal delay={0.1} className="lg:order-2">
+      <Reveal delay={0.1} className={reverse ? 'lg:order-1' : 'lg:order-2'}>
         <ProjectMockup project={project} />
       </Reveal>
     </article>
