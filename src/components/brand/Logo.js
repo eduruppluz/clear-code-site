@@ -1,0 +1,6 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { LogoMark } from './LogoMark';
+/** Logo horizontal: lâmpada viva + wordmark CLEAR CODE / ERL */
+export function Logo({ className = '', intro = false }) {
+    return (_jsxs("span", { className: `inline-flex items-center gap-2.5 ${className}`, children: [_jsx(LogoMark, { className: "h-9 w-auto shrink-0", intro: intro }), _jsxs("span", { className: "flex flex-col leading-none", children: [_jsxs("span", { className: "whitespace-nowrap font-display text-[0.95rem] tracking-[0.06em] text-white sm:text-[1.05rem]", children: [_jsx("span", { className: "font-light", children: "CLEAR" }), " ", _jsx("span", { className: "font-extrabold", children: "CODE" })] }), _jsxs("span", { className: "mt-1 flex items-center gap-1.5", "aria-hidden": "true", children: [_jsx("span", { className: "h-px flex-1", style: { background: 'var(--grad-accent)' } }), _jsx("span", { className: "font-display text-[0.6rem] font-bold tracking-[0.5em] pl-[0.5em]", style: { color: 'color-mix(in oklab, var(--accent-a) 70%, var(--accent-b))' }, children: "ERL" }), _jsx("span", { className: "h-px flex-1", style: { background: 'var(--grad-accent)' } })] })] })] }));
+}

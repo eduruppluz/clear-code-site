@@ -1,0 +1,8 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { motion } from 'motion/react';
+import { pillars } from '../../config/content';
+const ease = [0.22, 1, 0.36, 1];
+/** Os três pilares: Clareza · Tecnologia · Resultado — cada um com sua cor */
+export function Pillars() {
+    return (_jsx("ul", { className: "grid gap-4 md:grid-cols-3 md:gap-5", children: pillars.map((p, i) => (_jsxs(motion.li, { initial: { opacity: 0, y: 28 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '0px 0px -12% 0px' }, transition: { duration: 0.6, delay: i * 0.1, ease }, className: "glow-card is-interactive group p-7", style: { ['--c']: p.color }, children: [_jsxs("div", { className: "flex items-center justify-between", children: [_jsxs("span", { className: "font-display text-sm font-bold tabular-nums text-white/30", children: ["0", i + 1] }), _jsx("span", { className: "size-2 rounded-full transition-shadow duration-500 group-hover:shadow-[0_0_16px_4px_var(--c)]", style: { background: p.color } })] }), _jsx("h3", { className: "mt-10 font-display text-xl font-extrabold uppercase tracking-[0.08em]", style: { color: `color-mix(in oklab, ${p.color} 80%, white)` }, children: p.title }), _jsx(motion.span, { "aria-hidden": "true", className: "mt-4 block h-px origin-left", style: { background: `linear-gradient(90deg, ${p.color}, transparent)` }, initial: { scaleX: 0 }, whileInView: { scaleX: 1 }, viewport: { once: true }, transition: { duration: 0.9, delay: 0.25 + i * 0.1, ease } }), _jsx("p", { className: "mt-4 leading-relaxed text-muted", children: p.text })] }, p.title))) }));
+}

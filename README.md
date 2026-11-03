@@ -25,7 +25,7 @@ Identidade visual 2.0: logo da lâmpada com órbitas, fundo marinho e cores de d
 - Cor do site e da logo mudam a cada seção durante o scroll
 - Serviços com mini-animações (sites, landing pages, Meta Ads, captação, CRM e automações)
 - Processo de trabalho com linha do tempo animada
-- Portfólio: Valcar Consórcio, Mister Chapéu e Kit de Resumos de Odontologia
+- Portfólio: Mister Chapéu e Kit de Resumos de Odontologia
 - Formulário de contato que abre o WhatsApp com a mensagem pronta
 - Layout responsivo e suporte a "reduzir movimento"
 
