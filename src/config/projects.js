@@ -1,7 +1,33 @@
+import valcarDesktop from '../assets/projects/valcar/home-desktop.webp';
+import valcarMobile from '../assets/projects/valcar/home-mobile.webp';
 import misterChapeuDesktop from '../assets/projects/mister-chapeu/home-desktop.webp';
 import misterChapeuMobile from '../assets/projects/mister-chapeu/home-mobile.webp';
 import kitOdontoDesktop from '../assets/projects/kit-odonto/home-desktop.webp';
 export const projects = [
+    {
+        slug: 'valcar',
+        name: 'Valcar Consórcio',
+        url: 'https://consorciovalcar.com.br/',
+        type: 'Site Institucional',
+        tags: ['Website', 'UX/UI', 'Desenvolvimento'],
+        summary: 'Site novo da Valcar Consórcio, com unidades em Manaus e Curitiba, Chevrolet Consórcio e Consórcio União. A proposta: apresentar a empresa com credibilidade, mostrar os modelos e levar o visitante a uma simulação pronta no WhatsApp.',
+        delivered: [
+            'Site institucional responsivo',
+            'Simulador que envia a simulação pronta para o WhatsApp',
+            'Carrossel deslizante com os modelos Chevrolet',
+            'Seção do Consórcio União (carros, motos, imóveis e serviços)',
+            'Unidades de Manaus e Curitiba com mapa',
+            'Depoimentos reais em vídeo e texto',
+            'Página “Seja Representante” com ficha de cadastro',
+            'Domínio próprio configurado',
+        ],
+        images: {
+            desktop: valcarDesktop,
+            desktopAlt: 'Página inicial do site da Valcar Consórcio, com o título “Lugar de realizar.” e o simulador',
+            mobile: valcarMobile,
+            mobileAlt: 'Site da Valcar Consórcio no celular',
+        },
+    },
     {
         slug: 'mister-chapeu',
         name: 'Mister Chapéu',
