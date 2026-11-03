@@ -12,7 +12,7 @@ export const site = {
     description: 'Ideias que conectam. Tecnologia que transforma.',
     /** texto de apoio da página inicial e da descrição para o Google */
     pitch: 'Sites, anúncios e automações para conectar seu negócio aos clientes e organizar oportunidades comerciais.',
-    url: 'https://ctbadigital.com',
+    url: 'https://clearcodeerl.com.br',
     founder: 'Eduardo Rupp da Luz',
     contact: {
         whatsappDisplay: '(41) 98473-1156',

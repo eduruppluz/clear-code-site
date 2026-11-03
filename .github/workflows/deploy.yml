@@ -27,9 +27,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build:static
+      # domínio próprio (clearcodeerl.com.br): URLs limpas; o 404.html devolve o app nas rotas /solucoes, /projetos...
+      - run: npm run build
+      - run: cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site-estatico
+          path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
