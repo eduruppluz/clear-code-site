@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import { decodeTheme, type Theme } from '../config/themes'
-import { hexToOklab, oklabToHex, smooth, type Lab } from './color'
+import { hexHue, hexToOklab, oklabToHex, smooth, type Lab } from './color'
 
 /**
  * Motor de cor.
@@ -17,6 +17,7 @@ import { hexToOklab, oklabToHex, smooth, type Lab } from './color'
  * Também mantém a lista de seções rotuladas ([data-label]) para o
  * indicador lateral e qual delas está ativa.
  */
+const LOGO_HUE = 191 // matiz do ciano da tela inicial: lá a logo aparece com as cores oficiais
 type Anchor = { y: number; th: Theme }
 type Ctx = { labels: { id: string; label: string }[]; active: number }
 
@@ -42,8 +43,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     let lastT = 0
 
     // estado exibido (OKLab) e alvo
-    const init = hexToOklab('#6CC0FF')
-    const cur = { a: init, b: hexToOklab('#2563EB'), g: 1.15 }
+    const init = hexToOklab('#08BFE8')
+    const cur = { a: init, b: hexToOklab('#2563EB'), g: 1.2 }
     const tgt = { a: cur.a, b: cur.b, g: cur.g }
     let written = { a: '', b: '', g: '' }
 
@@ -101,7 +102,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
     const write = () => {
       const a = oklabToHex(cur.a), b = oklabToHex(cur.b), g = cur.g.toFixed(2)
-      if (a !== written.a) root.style.setProperty('--accent-a', a)
+      if (a !== written.a) {
+        root.style.setProperty('--accent-a', a)
+        // gira o tom da logo a partir das cores oficiais (tela inicial) para acompanhar a seção
+        let d = hexHue(a) - LOGO_HUE
+        if (d > 180) d -= 360
+        if (d < -180) d += 360
+        root.style.setProperty('--logo-hue', `${d.toFixed(1)}deg`)
+      }
       if (b !== written.b) root.style.setProperty('--accent-b', b)
       if (g !== written.g) root.style.setProperty('--glow', g)
       written = { a, b, g }

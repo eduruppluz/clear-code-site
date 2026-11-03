@@ -39,7 +39,7 @@ export function Button({ to, variant = 'primary', size = 'md', arrow = false, cl
         <span
           aria-hidden="true"
           className="absolute inset-0 -z-10"
-          style={{ background: 'linear-gradient(100deg, var(--cc-royal), color-mix(in oklab, var(--accent-a) 18%, var(--cc-royal)))' }}
+          style={{ background: 'linear-gradient(100deg, color-mix(in oklab, var(--accent-b) 72%, #0a1640), color-mix(in oklab, var(--accent-a) 58%, #0a1640))' }}
         />
       )}
       <span

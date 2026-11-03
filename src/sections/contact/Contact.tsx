@@ -7,8 +7,8 @@ import { site } from '../../config/site'
 const ease = [0.22, 1, 0.36, 1] as const
 
 const channels = [
-  { name: 'WhatsApp', detail: site.contact.whatsappDisplay, href: site.contact.whatsappUrl, color: palette.gelo, note: 'Canal mais rápido para conversar' },
-  { name: 'Instagram', detail: site.contact.instagramHandle, href: site.contact.instagramUrl, color: palette.aco, note: 'Acompanhe e mande uma mensagem' },
+  { name: 'WhatsApp', detail: site.contact.whatsappDisplay, href: site.contact.whatsappUrl, color: palette.aqua, note: 'Canal mais rápido para conversar' },
+  { name: 'Instagram', detail: site.contact.instagramHandle, href: site.contact.instagramUrl, color: palette.magenta, note: 'Acompanhe e mande uma mensagem' },
   { name: 'E-mail', detail: site.contact.email, href: `mailto:${site.contact.email}`, color: palette.azul, note: 'Para propostas e detalhes do projeto' },
 ]
 
@@ -103,7 +103,7 @@ export function ContactForm() {
       <button
         type="submit"
         className="mt-2 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full font-semibold text-white shadow-[0_10px_36px_-10px_var(--accent-a)] transition-transform duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
-        style={{ background: 'linear-gradient(100deg, var(--cc-royal), color-mix(in oklab, var(--accent-a) 18%, var(--cc-royal)))' }}
+        style={{ background: 'linear-gradient(100deg, color-mix(in oklab, var(--accent-b) 72%, #0a1640), color-mix(in oklab, var(--accent-a) 58%, #0a1640))' }}
       >
         Enviar pelo WhatsApp
         <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" /></svg>

@@ -3,9 +3,9 @@ import { palette } from './themes'
 /** Conteúdo institucional (fonte: apresentação institucional Clear Code ERL) */
 
 export const pillars = [
-  { title: 'Clareza', text: 'Soluções simples e processos transparentes.', color: palette.royal },
+  { title: 'Clareza', text: 'Soluções simples e processos transparentes.', color: palette.lilas },
   { title: 'Tecnologia', text: 'Estruturas modernas que funcionam de verdade.', color: palette.azul },
-  { title: 'Resultado', text: 'Cada projeto com propósito para o negócio.', color: palette.gelo },
+  { title: 'Resultado', text: 'Cada projeto com propósito para o negócio.', color: palette.aqua },
 ]
 
 export type ServiceId = 'sites' | 'landing' | 'trafego' | 'leads' | 'crm' | 'automacoes'
@@ -13,9 +13,9 @@ export type Stage = 'Atrair' | 'Captar' | 'Organizar'
 
 /** As 3 etapas do caminho do cliente — "do primeiro clique até a venda" */
 export const stages: { name: Stage; text: string; color: string }[] = [
-  { name: 'Atrair', text: 'Sites, landing pages e Meta Ads para o seu cliente te encontrar.', color: palette.gelo },
+  { name: 'Atrair', text: 'Sites, landing pages e Meta Ads para o seu cliente te encontrar.', color: palette.aqua },
   { name: 'Captar', text: 'Formulários, WhatsApp e páginas de conversão para ele entrar em contato.', color: palette.azul },
-  { name: 'Organizar', text: 'CRM e automações para nenhum contato se perder até virar venda.', color: palette.royal },
+  { name: 'Organizar', text: 'CRM e automações para nenhum contato se perder até virar venda.', color: palette.lilas },
 ]
 
 export const services: { id: ServiceId; stage: Stage; title: string; short: string; text: string; color: string }[] = [
@@ -25,7 +25,7 @@ export const services: { id: ServiceId; stage: Stage; title: string; short: stri
     title: 'Sites',
     short: 'Presença digital profissional',
     text: 'Sites institucionais rápidos, responsivos e bem estruturados para apresentar sua empresa com a credibilidade que ela merece.',
-    color: palette.gelo,
+    color: palette.aqua,
   },
   {
     id: 'landing',
@@ -33,7 +33,7 @@ export const services: { id: ServiceId; stage: Stage; title: string; short: stri
     title: 'Landing Pages',
     short: 'Campanhas e conversão',
     text: 'Páginas focadas em um único objetivo, pensadas para transformar visitantes em contatos, vendas ou inscrições.',
-    color: palette.ceu,
+    color: palette.ciano,
   },
   {
     id: 'trafego',
@@ -49,7 +49,7 @@ export const services: { id: ServiceId; stage: Stage; title: string; short: stri
     title: 'Captação de contatos',
     short: 'Formulários, WhatsApp e conversão',
     text: 'Formulários, botões de WhatsApp e páginas de conversão que transformam quem visita em quem chama você.',
-    color: palette.ceu,
+    color: palette.lilas,
   },
   {
     id: 'crm',
@@ -57,7 +57,7 @@ export const services: { id: ServiceId; stage: Stage; title: string; short: stri
     title: 'CRM',
     short: 'Seus contatos em um só lugar',
     text: 'Implantação e configuração de CRM para acompanhar cada contato, da primeira mensagem até a venda, sem planilha perdida.',
-    color: palette.royal,
+    color: palette.violeta,
   },
   {
     id: 'automacoes',
@@ -65,7 +65,7 @@ export const services: { id: ServiceId; stage: Stage; title: string; short: stri
     title: 'Automações',
     short: 'Respostas e follow-up no automático',
     text: 'O contato chega, cai no CRM e recebe uma mensagem na hora. Você só entra para fazer o follow-up e fechar.',
-    color: palette.profundo,
+    color: palette.magenta,
   },
 ]
 
@@ -73,12 +73,12 @@ export const steps = [
   {
     n: '01', title: 'Entendemos', kicker: 'Imersão',
     text: 'Conhecemos o negócio, objetivos, público e desafio. Mergulhamos no que realmente importa antes de propor qualquer solução.',
-    icon: 'search', themeKey: 'step1', color: palette.gelo,
+    icon: 'search', themeKey: 'step1', color: palette.aqua,
   },
   {
     n: '02', title: 'Planejamos', kicker: 'Estratégia',
     text: 'Definimos estratégia, prioridades e estrutura — o melhor caminho para gerar resultados reais.',
-    icon: 'map', themeKey: 'step2', color: palette.ceu,
+    icon: 'map', themeKey: 'step2', color: palette.ciano,
   },
   {
     n: '03', title: 'Criamos', kicker: 'Construção',
@@ -93,26 +93,26 @@ export const steps = [
   {
     n: '05', title: 'Acompanhamos', kicker: 'Evolução',
     text: 'Analisamos os resultados e identificamos oportunidades de evolução para manter sua solução sempre à frente.',
-    icon: 'chart', themeKey: 'step5', color: palette.profundo,
+    icon: 'chart', themeKey: 'step5', color: palette.magenta,
   },
 ] as const
 
 export const principles = [
-  { title: 'Comunicação clara', text: 'Tecnologia sem tecniquês desnecessário. Transparência e entendimento em cada etapa.', color: palette.ceu },
+  { title: 'Comunicação clara', text: 'Tecnologia sem tecniquês desnecessário. Transparência e entendimento em cada etapa.', color: palette.ciano },
   { title: 'Visão de negócio', text: 'Foco no objetivo por trás da tecnologia.', color: palette.azul },
   { title: 'Soluções sob medida', text: 'Projetos personalizados para a realidade de cada negócio.', color: palette.royal },
-  { title: 'Evolução', text: 'Pensar no presente e no futuro do negócio.', color: palette.aco },
+  { title: 'Evolução', text: 'Pensar no presente e no futuro do negócio.', color: palette.magenta },
 ]
 
 export const dnaFlow = [
   { title: 'Ideia', text: 'Entendemos o desafio com clareza.', color: palette.royal },
   { title: 'Estratégia', text: 'Planejamos o caminho mais inteligente.', color: palette.azul },
-  { title: 'Tecnologia', text: 'Construímos com código, dados e excelência.', color: palette.ceu },
-  { title: 'Resultado', text: 'Entregamos soluções que geram valor de verdade.', color: palette.gelo },
+  { title: 'Tecnologia', text: 'Construímos com código, dados e excelência.', color: palette.ciano },
+  { title: 'Resultado', text: 'Entregamos soluções que geram valor de verdade.', color: palette.aqua },
 ]
 
 export const dnaName = [
   { word: 'CLEAR', text: 'Clareza para compreender e simplificar processos.', color: palette.royal },
   { word: 'CODE', text: 'Tecnologia e execução para transformar ideias em soluções.', color: palette.azul },
-  { word: 'ERL', text: 'Assinatura do fundador, Eduardo Rupp da Luz.', color: palette.ceu },
+  { word: 'ERL', text: 'Assinatura do fundador, Eduardo Rupp da Luz.', color: palette.ciano },
 ]

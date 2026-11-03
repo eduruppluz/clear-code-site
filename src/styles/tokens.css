@@ -45,8 +45,9 @@
   --grad-brand: linear-gradient(100deg, var(--cc-royal) 0%, var(--cc-azul) 50%, var(--cc-gelo) 100%);
 
   /* — Acento dinâmico (valores iniciais = Hero). Atualizados via JS. — */
-  --accent-a: #6cc0ff;
+  --accent-a: #08bfe8;
   --accent-b: #2563eb;
+  --logo-hue: 0deg;           /* giro de tom da logo (calculado pelo motor de cor) */
   --glow: 1;                  /* 0..1.4 — intensidade de luz da seção */
   --grad-accent: linear-gradient(100deg, var(--accent-b), var(--accent-a));
 

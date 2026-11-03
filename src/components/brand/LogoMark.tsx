@@ -6,7 +6,8 @@ import simbolo from '../../assets/brand/simbolo-colorido.webp'
  * Arquivo: src/assets/brand/simbolo-colorido.webp (fundo transparente).
  * Vetores (marinho/branco/degradê) ficam em brand-source/ para uso em impressão.
  *
- * O brilho em volta usa --accent-a, então ele acompanha a cor da seção ativa.
+ * O tom da logo gira (hue-rotate) e o brilho usa --accent-a: os dois acompanham
+ * a cor da seção ativa, como a lâmpada "viva" da versão anterior.
  */
 type Props = {
   className?: string
@@ -34,7 +35,9 @@ export function LogoMark({ className, intro = false, delay = 0, glow = true, tit
       width={760}
       height={854}
       style={{
-        filter: glow ? 'drop-shadow(0 0 calc(var(--glow) * 10px) color-mix(in oklab, var(--accent-a) 45%, transparent))' : undefined,
+        filter: glow
+          ? 'hue-rotate(var(--logo-hue, 0deg)) drop-shadow(0 0 calc(var(--glow) * 10px) color-mix(in oklab, var(--accent-a) 45%, transparent))'
+          : 'hue-rotate(var(--logo-hue, 0deg))',
       }}
       {...(animate
         ? {

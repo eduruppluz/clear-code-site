@@ -53,5 +53,16 @@ export function mixHex(from: string, to: string, t: number): string {
   return oklabToHex([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t])
 }
 
+/** Matiz HSL (0–360) de uma cor hex — usado para girar o tom da logo */
+export function hexHue(hex: string): number {
+  const n = parseInt(hex.replace('#', ''), 16)
+  const r = ((n >> 16) & 255) / 255, g = ((n >> 8) & 255) / 255, b = (n & 255) / 255
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min
+  if (!d) return 0
+  let h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4
+  h *= 60
+  return h < 0 ? h + 360 : h
+}
+
 /** suavização para que a cor "assente" perto de cada stop */
 export const smooth = (t: number) => t * t * (3 - 2 * t)
