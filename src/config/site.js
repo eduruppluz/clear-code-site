@@ -14,6 +14,8 @@ export const site = {
     pitch: 'Sites, anúncios e automações para conectar seu negócio aos clientes e organizar oportunidades comerciais.',
     url: 'https://clearcodeerl.com.br',
     founder: 'Eduardo Rupp da Luz',
+    /** recebe os leads do formulário na planilha do CRM; o endereço é público, sem token */
+    crmUrl: 'https://script.google.com/macros/s/AKfycbySjIOjJoYL5OcnvhKc-GiNecCRSNfEgpR1Dk94gfAcxK4fKiRjY792ac-P0o_qGrst/exec',
     contact: {
         whatsappDisplay: '(41) 98473-1156',
         whatsappUrl: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,

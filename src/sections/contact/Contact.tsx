@@ -45,24 +45,76 @@ export function ContactChannels() {
   )
 }
 
-/** Formulário sem servidor: monta a mensagem e abre o WhatsApp já preenchido. */
+const origins: Record<string, string> = {
+  facebook: 'Meta Ads',
+  fb: 'Meta Ads',
+  meta: 'Meta Ads',
+  instagram: 'Instagram',
+  ig: 'Instagram',
+  google: 'Google',
+}
+
+function formatPhone(value: string) {
+  const d = value.replace(/\D/g, '').slice(0, 11)
+  if (d.length <= 2) return d
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
+}
+
+/** Grava o lead sem esperar resposta: uma falha aqui nunca impede a conversa no WhatsApp. */
+function saveLead(lead: Record<string, string | boolean>) {
+  fetch(site.crmUrl, {
+    method: 'POST',
+    mode: 'no-cors',
+    keepalive: true,
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(lead),
+  }).catch(() => {})
+}
+
+/** Registra o lead no CRM e abre o WhatsApp com a mensagem pronta. */
 export function ContactForm() {
   const [error, setError] = useState('')
+  const [phone, setPhone] = useState('')
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const f = new FormData(e.currentTarget)
+    if (f.get('website')) return
     const name = String(f.get('name') ?? '').trim()
     const message = String(f.get('message') ?? '').trim()
+    const company = String(f.get('company') ?? '').trim()
+    const service = String(f.get('service') ?? '').trim()
     if (!name || !message) {
       setError('Preencha seu nome e conte um pouco sobre o projeto.')
       return
     }
+    if (phone.replace(/\D/g, '').length < 10) {
+      setError('Informe seu WhatsApp com DDD.')
+      return
+    }
+    if (!f.get('consent')) {
+      setError('Marque a autorização para continuar.')
+      return
+    }
     setError('')
+
+    const params = new URLSearchParams(window.location.search)
+    const source = params.get('utm_source')?.trim() ?? ''
+    saveLead({
+      nome: name,
+      whatsapp: phone,
+      interesse: [service, company && `Empresa: ${company}`, message].filter(Boolean).join(' | '),
+      origem: origins[source.toLowerCase()] ?? (source || 'Site'),
+      utm_campaign: params.get('utm_campaign') ?? '',
+      consentimento: true,
+    })
+
     const lines = [
       `Olá, Clear Code! Meu nome é ${name}.`,
-      f.get('company') ? `Empresa: ${f.get('company')}` : '',
-      f.get('service') ? `Interesse: ${f.get('service')}` : '',
+      company ? `Empresa: ${company}` : '',
+      service ? `Interesse: ${service}` : '',
       '',
       message,
     ].filter((l, i, arr) => l !== '' || (i > 0 && arr[i - 1] !== ''))
@@ -76,7 +128,7 @@ export function ContactForm() {
   return (
     <form onSubmit={submit} noValidate className="glow-card p-6 sm:p-8" data-on="true" aria-labelledby="form-title">
       <h2 id="form-title" className="font-display text-2xl font-bold">Conte sobre o seu projeto</h2>
-      <p className="mt-2 text-sm text-muted">Ao enviar, abrimos o WhatsApp com a sua mensagem pronta.</p>
+      <p className="mt-2 text-sm text-muted">Ao enviar, registramos seu contato e abrimos o WhatsApp com a sua mensagem pronta.</p>
       <div className="mt-7 grid gap-5 sm:grid-cols-2">
         <label className="block text-sm font-medium">
           Nome <span aria-hidden="true" style={{ color: 'var(--accent-a)' }}>*</span>
@@ -85,6 +137,10 @@ export function ContactForm() {
         <label className="block text-sm font-medium">
           Empresa <span className="text-dim">(opcional)</span>
           <input name="company" autoComplete="organization" className={field} placeholder="Nome da empresa" />
+        </label>
+        <label className="block text-sm font-medium sm:col-span-2">
+          WhatsApp <span aria-hidden="true" style={{ color: 'var(--accent-a)' }}>*</span>
+          <input name="whatsapp" type="tel" inputMode="tel" required autoComplete="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} className={field} placeholder="(41) 99999-0000" />
         </label>
         <label className="block text-sm font-medium sm:col-span-2">
           O que você precisa?
@@ -99,6 +155,14 @@ export function ContactForm() {
           <textarea name="message" required rows={5} className={`${field} resize-y`} placeholder="Qual é a sua ideia, necessidade ou desafio?" />
         </label>
       </div>
+      <label className="absolute -left-[9999px] size-px overflow-hidden" aria-hidden="true">
+        Não preencha
+        <input name="website" tabIndex={-1} autoComplete="off" />
+      </label>
+      <label className="mt-5 flex items-start gap-3 text-sm text-muted">
+        <input name="consent" type="checkbox" required className="mt-0.5 size-5 shrink-0" style={{ accentColor: 'var(--accent-a)' }} />
+        <span>Autorizo a Clear Code a guardar meus dados e entrar em contato sobre este pedido.</span>
+      </label>
       <p role="alert" aria-live="polite" className="mt-4 min-h-5 text-sm" style={{ color: '#FF9A9A' }}>{error}</p>
       <button
         type="submit"
