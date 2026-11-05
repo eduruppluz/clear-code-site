@@ -62,23 +62,24 @@ function formatPhone(value: string) {
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
 }
 
-/** Grava o lead sem esperar resposta: uma falha aqui nunca impede a conversa no WhatsApp. */
-function saveLead(lead: Record<string, string | boolean>) {
-  fetch(site.crmUrl, {
+/** Grava o lead e informa se o CRM confirmou o registro. */
+async function saveLead(lead: Record<string, string | boolean>): Promise<{ ok: boolean; erro?: string }> {
+  const response = await fetch(site.crmUrl, {
     method: 'POST',
-    mode: 'no-cors',
-    keepalive: true,
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify(lead),
-  }).catch(() => {})
+  })
+  return response.json()
 }
 
-/** Registra o lead no CRM e abre o WhatsApp com a mensagem pronta. */
+/** Registra o lead no CRM, confirma na tela e oferece o WhatsApp com a mensagem pronta. */
 export function ContactForm() {
   const [error, setError] = useState('')
   const [phone, setPhone] = useState('')
+  const [sending, setSending] = useState(false)
+  const [result, setResult] = useState<{ saved: boolean; whatsapp: string } | null>(null)
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const f = new FormData(e.currentTarget)
     if (f.get('website')) return
@@ -100,17 +101,6 @@ export function ContactForm() {
     }
     setError('')
 
-    const params = new URLSearchParams(window.location.search)
-    const source = params.get('utm_source')?.trim() ?? ''
-    saveLead({
-      nome: name,
-      whatsapp: phone,
-      interesse: [service, company && `Empresa: ${company}`, message].filter(Boolean).join(' | '),
-      origem: origins[source.toLowerCase()] ?? (source || 'Site'),
-      utm_campaign: params.get('utm_campaign') ?? '',
-      consentimento: true,
-    })
-
     const lines = [
       `Olá, Clear Code! Meu nome é ${name}.`,
       company ? `Empresa: ${company}` : '',
@@ -119,16 +109,62 @@ export function ContactForm() {
       message,
     ].filter((l, i, arr) => l !== '' || (i > 0 && arr[i - 1] !== ''))
     const number = site.contact.whatsappUrl.match(/wa\.me\/(\d+)/)?.[1]
-    window.open(`https://wa.me/${number}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener')
+    const whatsapp = `https://wa.me/${number}?text=${encodeURIComponent(lines.join('\n'))}`
+
+    const params = new URLSearchParams(window.location.search)
+    const source = params.get('utm_source')?.trim() ?? ''
+    setSending(true)
+    try {
+      const saved = await saveLead({
+        nome: name,
+        whatsapp: phone,
+        interesse: [service, company && `Empresa: ${company}`, message].filter(Boolean).join(' | '),
+        origem: origins[source.toLowerCase()] ?? (source || 'Site'),
+        utm_campaign: params.get('utm_campaign') ?? '',
+        consentimento: true,
+      })
+      if (saved.ok) {
+        setResult({ saved: true, whatsapp })
+      } else {
+        setError(saved.erro === 'WhatsApp invalido' ? 'Confira o número do seu WhatsApp, com DDD.' : 'Não foi possível enviar. Confira os dados e tente de novo.')
+      }
+    } catch {
+      setResult({ saved: false, whatsapp })
+    } finally {
+      setSending(false)
+    }
   }
 
   const field =
     'mt-2 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-white placeholder:text-dim transition-[border-color,box-shadow] duration-300 focus:border-[color:var(--accent-a)] focus:shadow-[0_0_0_3px_color-mix(in_oklab,var(--accent-a)_25%,transparent)] focus:outline-none'
 
+  if (result) {
+    return (
+      <div role="status" className="glow-card p-6 sm:p-8" data-on="true">
+        <h2 className="font-display text-2xl font-bold">{result.saved ? 'Recebemos seu pedido!' : 'Falta só um passo'}</h2>
+        <p className="mt-3 text-muted">
+          {result.saved
+            ? 'Vamos falar com você pelo WhatsApp que você informou. Se preferir, pode nos chamar agora.'
+            : 'Não conseguimos confirmar o registro do seu pedido. Para garantir, envie sua mensagem pelo WhatsApp.'}
+        </p>
+        <a
+          href={result.whatsapp}
+          target="_blank"
+          rel="noopener"
+          className="mt-7 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full font-semibold text-white shadow-[0_10px_36px_-10px_var(--accent-a)] transition-transform duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
+          style={{ background: 'linear-gradient(100deg, color-mix(in oklab, var(--accent-b) 72%, #0a1640), color-mix(in oklab, var(--accent-a) 58%, #0a1640))' }}
+        >
+          Falar agora no WhatsApp
+          <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" /></svg>
+        </a>
+      </div>
+    )
+  }
+
   return (
     <form onSubmit={submit} noValidate className="glow-card p-6 sm:p-8" data-on="true" aria-labelledby="form-title">
       <h2 id="form-title" className="font-display text-2xl font-bold">Conte sobre o seu projeto</h2>
-      <p className="mt-2 text-sm text-muted">Ao enviar, registramos seu contato e abrimos o WhatsApp com a sua mensagem pronta.</p>
+      <p className="mt-2 text-sm text-muted">Ao enviar, registramos seu pedido e você pode falar com a gente pelo WhatsApp, se quiser.</p>
       <div className="mt-7 grid gap-5 sm:grid-cols-2">
         <label className="block text-sm font-medium">
           Nome <span aria-hidden="true" style={{ color: 'var(--accent-a)' }}>*</span>
@@ -166,10 +202,11 @@ export function ContactForm() {
       <p role="alert" aria-live="polite" className="mt-4 min-h-5 text-sm" style={{ color: '#FF9A9A' }}>{error}</p>
       <button
         type="submit"
-        className="mt-2 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full font-semibold text-white shadow-[0_10px_36px_-10px_var(--accent-a)] transition-transform duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
+        disabled={sending}
+        className="mt-2 inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-full font-semibold text-white shadow-[0_10px_36px_-10px_var(--accent-a)] transition-transform duration-300 hover:-translate-y-0.5 active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
         style={{ background: 'linear-gradient(100deg, color-mix(in oklab, var(--accent-b) 72%, #0a1640), color-mix(in oklab, var(--accent-a) 58%, #0a1640))' }}
       >
-        Enviar pelo WhatsApp
+        {sending ? 'Enviando...' : 'Enviar pedido'}
         <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" /></svg>
       </button>
     </form>
