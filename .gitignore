@@ -8,3 +8,8 @@ site-estatico
 .DS_Store
 Thumbs.db
 *.log
+
+# saída do tsc (o Vite usaria estes .js no lugar dos .tsx)
+src/**/*.js
+vite.config.js
+*.tsbuildinfo
